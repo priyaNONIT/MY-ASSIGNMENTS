@@ -31,6 +31,8 @@ public class Leaftaps {
 		obj2.selectByValue("OWN_CCORP");
 		driver.findElement(By.className("smallSubmit")).click();
 		driver.getTitle();
+		String title=driver.getTitle();
+		System.out.println("Title of the webpage;"+title);
 		Thread.sleep(5000);
 		driver.close();
 		
