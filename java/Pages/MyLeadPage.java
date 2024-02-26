@@ -4,17 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import Base.ProjectSpecificMethods;
+import io.cucumber.java.en.And;
 
 public class MyLeadPage extends ProjectSpecificMethods {
 
-	public MyLeadPage(ChromeDriver driver) {
-		this.driver=driver;
-		// TODO Auto-generated constructor stub
-	}
-
+	
+@And("Click Createlead link")
 	public CreateLeadPage clickCreateLeadLink() {
-		driver.findElement(By.linkText("Create Lead")).click();
-		return new CreateLeadPage(driver);
+	getDriver().findElement(By.linkText("Create Lead")).click();
+		return new CreateLeadPage();
 	}
 
 }

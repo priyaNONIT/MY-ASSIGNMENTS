@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import Base.ProjectSpecificMethods;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class WelcomePage extends ProjectSpecificMethods {
-	public WelcomePage(ChromeDriver driver) {
-		this.driver=driver;
-	}
 	
+	@Then("Homepage should be displayed")
 	public WelcomePage verifyHomePage() {
-		String text = driver.findElement(By.tagName("h2")).getText();
+		String text = getDriver().findElement(By.tagName("h2")).getText();
 		if (text.contains("Welcome")) {
 			System.out.println("Home Page is Displayed");
 			
@@ -24,9 +24,10 @@ public class WelcomePage extends ProjectSpecificMethods {
 	
 	
 	}
+	@When("Click on crmsfa link")
 	public MyHomePage clickCRMSFALink() {
-		driver.findElement(By.partialLinkText("CRM/SFA")).click();
-		return new MyHomePage(driver);
+		getDriver().findElement(By.partialLinkText("CRM/SFA")).click();
+		return new MyHomePage();
 		
 	}
 }

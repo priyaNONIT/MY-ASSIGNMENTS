@@ -4,16 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import Base.ProjectSpecificMethods;
+import io.cucumber.java.en.And;
 
 public class MyHomePage extends ProjectSpecificMethods{
 
-	public MyHomePage(ChromeDriver driver) {
-		this.driver=driver;
-	}
-
+	
+	@And("Click leads link")
 	public MyLeadPage clickLeadsLink() {
-		driver.findElement(By.linkText("Leads")).click();
-		return new MyLeadPage(driver);
+		getDriver().findElement(By.linkText("Leads")).click();
+		return new MyLeadPage();
 		
 	}
 

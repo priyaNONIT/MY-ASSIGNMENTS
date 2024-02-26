@@ -8,23 +8,32 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
-import util.ReadExcel;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import utils.ReadExcel;
 
-public class ProjectSpecificMethods {
-public ChromeDriver driver;
+public class ProjectSpecificMethods extends AbstractTestNGCucumberTests {
+private static final ThreadLocal<ChromeDriver> chdriver=new ThreadLocal<ChromeDriver>();
 public String fileName;
+public void setDriver() {
+	chdriver.set(new ChromeDriver());
+}
+public ChromeDriver getDriver() {
+	return chdriver.get();
+	
+}
+
 @BeforeMethod
 public void precondition() {
-	driver  = new ChromeDriver();
-	driver.manage().window().maximize();
-	driver.get("http://leaftaps.com/opentaps/control/main");
-	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	setDriver();
+	getDriver().manage().window().maximize();
+	getDriver().get("http://leaftaps.com/opentaps/control/main");
+	getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 }
 @AfterMethod
 public void postcondition() {
-	driver.quit();
+	getDriver().quit();
 }
-@DataProvider(name="fetchData")
+@DataProvider(name="fetchData",parallel=true)
 public String[][] sendData() throws IOException {
 	return ReadExcel.readExcel(fileName);
 }
